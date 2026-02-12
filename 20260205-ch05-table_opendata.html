@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ch05-table_practice</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/mycss02.css" />
+  <style>
+    table img {
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.3);
+    }
+
+    @media screen and (max-width: 768px) {
+      .table-rwd thead {
+        display: none;
+      }
+
+      .table-rwd tbody tr {
+        display: block;
+        border: 1px solid var(--cork18);
+        margin-top: 20px;
+      }
+
+      .table-rwd tbody tr td {
+        display: block;
+        overflow: hidden;
+      }
+
+      .table-rwd tbody tr td::before {
+        content: attr(data-th)" : ";
+        color: var(--cork12);
+        font-size: 20px;
+        font-weight: 600;
+        display: block;
+        float: left;
+        width: 30%;
+        text-align: right;
+        padding-right: 1.5em;
+      }
+
+      .table-rwd tbody tr td span {
+        display: block;
+        float: left;
+        width: 70%;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="title-elegant text-center" id="tabletitle">Opendata Applycation</div>
+  <div class="container">
+    <table class="table table-rwd">
+      <thead class="table-warning">
+        <tr>
+          <th>店家名稱</th>
+          <th>店家圖片</th>
+          <th>地址</th>
+          <th>聯絡電話</th>
+          <th>說明</th>
+        </tr>
+      </thead>
+      <tbody id="storelist">
+        <tr>
+          <td data-th="店家名稱"><span>001</span></td>
+          <td data-th="店家圖片">
+            <span><img src="images/drink-7.jpg" width="200px" alt="" /></span>
+          </td>
+          <td data-th="地址"><span>drink-7</span></td>
+          <td data-th="聯絡電話"><span>10</span></td>
+          <td data-th="說明"><span>spicy</span></td>
+        </tr>
+        <tr>
+          <td data-th="店家名稱"><span>002</span></td>
+          <td data-th="店家圖片"><span><img src="images/drink-6.jpg" width="200px" alt="" /></span></td>
+          <td data-th="地址"><span>drink-6</span></td>
+          <td data-th="聯絡電話"><span>15</span></td>
+          <td data-th="說明"><span>sweet</span></td>
+        </tr>
+        <tr>
+          <td data-th="店家名稱"><span>003</span></td>
+          <td data-th="店家圖片"><span><img src="images/drink-5.jpg" width="200px" alt="" /></span></td>
+          <td data-th="地址"><span>drink-5</span></td>
+          <td data-th="聯絡電話"><span>10</span></td>
+          <td data-th="說明"><span>dscdsd</span></td>
+        </tr>
+        <tr>
+          <td data-th="店家名稱"><span>004</span></td>
+          <td data-th="店家圖片"><span><img src="images/drink-4.jpg" width="200px" alt="" /></span></td>
+          <td data-th="地址"><span>drink-4</span></td>
+          <td data-th="聯絡電話"><span>15</span></td>
+          <td data-th="說明"><span>sweet</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery-4.0.0.js"></script>
+  <script>
+    // JS(javascript) 主程式 $(function(){});
+    // console log 只用在開發時，專案完成要把 console 都刪掉或註解，不然別人會看到你怎麼寫程式，而且會變很亂
+    // 串接 opendata -> 用 $.ajax 來串接前後端資料
+    // 變數跟變數、字串跟變數、字串跟字串之間用 + 串連
+    // . --> class (for css), # --> id (for javascript)
+    // $().empty(); -> 將變數原本的資料清空
+    // JS 宣告變數用『let』
+    $(function () {
+      $("#tabletitle").html("地方美食店家列表");
+
+      // console.log("Hello again.");
+
+      $.ajax({
+        type: "GET",
+        url: "https://data.moa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelFood.aspx?IsTransData=1&UnitId=193",
+        dataType: "json",
+        success: showdata,
+        error: function () {
+          console.log("Bad connection");
+        }
+      });
+    });
+
+    function showdata(data) {
+      console.log(data);
+
+      $("#storelist").empty();
+      data.forEach(function (item) {
+        // console.log("店家名稱：" + item.Name);
+        // console.log("店家圖片：" + item.PicURL);
+        // console.log("地址：" + item.City + item.Town + item.Address);
+        // console.log("聯絡電話：" + item.Tel);
+        // console.log("說明：" + item.FoodFeature);
+
+        // 資料防呆 可用 三元運算子（? : ;）
+        let img = item.PicURL ? item.PicURL : "images/cat-1.jpg";
+        let name = item.Name ? item.Name : "未提供";
+        let tel = item.Tel ? item.Tel : "未提供電話";
+        let foodfeature = item.FoodFeature ? item.FoodFeature : "未提供";
+        let adr = item.City + item.Town + item.Address ? item.City + item.Town + item.Address : "未提供";
+
+
+        let strHTML = `<tr>
+                        <td data-th="店家名稱"><span>${name}</span></td>
+                        <td data-th="店家圖片"><span> <img src="${img}" width="200" alt="" /> </span></td>
+                        <td data-th="地址"><span>${adr}</span></td>
+                        <td data-th="聯絡電話"><span>${tel}</span></td>
+                        <td data-th="說明"><span>${foodfeature}</span></td>
+                      </tr>`;
+        $("#storelist").append(strHTML);
+      });
+    }
+
+  </script>
+</body>
+
+</html>

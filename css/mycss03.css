@@ -1,0 +1,31 @@
+:root {
+    /* === 深海藍調系列 (Deep Ocean Blue) === */
+    --vitaminsea01: #4a8ed1;  /* 晴空海藍 Sky Ocean */
+    --vitaminsea02: #2470be;  /* 海洋藍 Ocean Blue */
+    --vitaminsea03: #0359AE;  /* 深海藍 Deep Sea */
+    --vitaminsea04: #024a8a;  /* 海溝藍 Trench Blue */
+    
+    /* === 碧綠海水系列 (Turquoise Waters) === */
+    --vitaminsea05: #5dd4c0;  /* 淺水綠 Shallow Water */
+    --vitaminsea06: #2ec4ad;  /* 碧海綠 Turquoise */
+    --vitaminsea07: #14B09B;  /* 海水綠 Seawater Green */
+    --vitaminsea08: #0f9683;  /* 深水綠 Deep Aqua */
+    
+    /* === 沙灘米白系列 (Sandy Beach) === */
+    --vitaminsea09: #f8f4ec;  /* 貝殼白 Shell White */
+    --vitaminsea10: #f0eadc;  /* 珊瑚沙 Coral Sand */
+    --vitaminsea11: #EBE5D9;  /* 沙灘米 Beach Beige */
+    --vitaminsea12: #ddd4c3;  /* 暖沙色 Warm Sand */
+    
+    /* === 日落橘金系列 (Sunset Gold) === */
+    --vitaminsea13: #e5a976;  /* 陽光橘 Sunshine Orange */
+    --vitaminsea14: #CC8A56;  /* 日落金 Sunset Gold */
+    --vitaminsea15: #b8743d;  /* 琥珀橘 Amber Orange */
+    --vitaminsea16: #9a5f31;  /* 古銅棕 Bronze Tan */
+    
+    /* === 海洋漸層系列 (Ocean Gradient) === */
+    --vitaminsea17: #4ca9c4;  /* 熱帶藍 Tropical Blue */
+    --vitaminsea18: #3fb5a3;  /* 青綠海 Cyan Sea */
+    --vitaminsea19: #d9c9a8;  /* 浪花米 Wave Foam */
+    --vitaminsea20: #7a9fa8;  /* 海霧灰藍 Sea Mist */
+}

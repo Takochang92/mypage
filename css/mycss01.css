@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap');
+body{
+    font-family: "Jacques Francois Shadow", serif;
+}
+
+:root {
+    /* === 混凝土灰階系列 (Concrete Gray) === */
+    --grunge01: #e8e8e9;  /* 霧灰白 Fog Gray */
+    --grunge02: #d4d4d6;  /* 水泥灰 Cement Gray */
+    --grunge03: #bdbdbf;  /* 舊牆灰 Worn Wall */
+    --grunge04: #9a9a9c;  /* 煙塵灰 Smoke Dust */
+    
+    /* === 鋼鐵藍調系列 (Steel Blue) === */
+    --grunge05: #7a9bb8;  /* 褪色牛仔 Faded Denim */
+    --grunge06: #5580a0;  /* 鐵鏽藍 Rusty Blue */
+    --grunge07: #446a88;  /* 暗夜藍 Dark Night Blue */
+    --grunge08: #32435f;  /* 午夜鋼鐵 Midnight Steel */
+    
+    /* === 鏽蝕橘棕系列 (Rust Orange) === */
+    --grunge09: #e0a56d;  /* 沙漠橘 Desert Orange */
+    --grunge10: #cc8a4d;  /* 鏽橘棕 Rust Orange */
+    --grunge11: #a67240;  /* 舊皮革 Old Leather */
+    --grunge12: #7d5430;  /* 焦土棕 Scorched Earth */
+    
+    /* === 深夜暗黑系列 (Midnight Dark) === */
+    --grunge13: #2a3649;  /* 柏油黑 Asphalt Black */
+    --grunge14: #1f2937;  /* 街道暗影 Street Shadow */
+    --grunge15: #1a1f2e;  /* 噴漆黑 Spray Black */
+    --grunge16: #0d1117;  /* 深夜焦黑 Deep Night */
+    
+    /* === 街頭髒污系列 (Street Grime) === */
+    --grunge17: #8b8373;  /* 塵土卡其 Dusty Khaki */
+    --grunge18: #6b7885;  /* 濕水泥 Wet Concrete */
+    --grunge19: #8a6b52;  /* 污漬棕 Stain Brown */
+    --grunge20: #4a4a4a;  /* 瀝青灰 Tar Gray */
+}

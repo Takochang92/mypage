@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>個人簡歷製作</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/mycss02.css" />
+    <style>
+      body {
+        background-color: var(--cork02);
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* Section 01 - 個人介紹區 */
+      .section01 {
+        min-height: 100vh;
+        position: relative;
+        background-color: var(--cork01);
+        overflow: hidden;
+      }
+      
+      /* 裝飾方塊加入動畫 */
+      .section01 .box01,
+      .section01 .box02,
+      .section01 .box03,
+      .section01 .box04 {
+        width: 200px;
+        height: 200px;
+        background-color: var(--cork12);
+        position: absolute;
+        transition: all 0.5s ease;
+        opacity: 0.8;
+      }
+      
+      .section01 .box01 { 
+        top: 0; 
+        right: 0;
+        animation: float1 6s ease-in-out infinite;
+      }
+      .section01 .box02 { 
+        top: 0; 
+        left: 0;
+        animation: float2 7s ease-in-out infinite;
+      }
+      .section01 .box03 { 
+        bottom: 0; 
+        left: 0;
+        animation: float3 8s ease-in-out infinite;
+      }
+      .section01 .box04 { 
+        bottom: 0; 
+        right: 0;
+        animation: float4 6.5s ease-in-out infinite;
+      }
+      
+      /* 浮動動畫 */
+      @keyframes float1 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-20px, 20px); }
+      }
+      @keyframes float2 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(20px, 20px); }
+      }
+      @keyframes float3 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(20px, -20px); }
+      }
+      @keyframes float4 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-20px, -20px); }
+      }
+      
+      .userimg {
+        position: absolute;
+        top: 100px;
+        bottom: 100px;
+        left: 100px;
+        right: 100px;
+        background-color: var(--cork08);
+        background-image: url(images/cat-5.jpg);
+        background-size: cover;
+        background-position: 0 0;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+      }
+      
+      .userimg:hover {
+        transform: scale(1.02);
+      }
+      
+      /* 增強文字區塊視覺效果 */
+      .usertext {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, rgba(142, 58, 65, 0.85), rgba(87, 35, 58, 0.85));
+        backdrop-filter: blur(10px);
+        color: var(--cork01);
+        text-align: center;
+        padding: 40px 50px;
+        border-radius: 30px;
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        max-width: 90%;
+        width: auto;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        animation: fadeInUp 1s ease-out;
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -40%);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+      
+      .usertext h1 {
+        font-size: clamp(36px, 8vw, 80px);
+        margin-bottom: 0;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        animation: slideInLeft 0.8s ease-out 0.2s both;
+      }
+      
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      .usertext h2 {
+        font-size: clamp(24px, 4vw, 40px);
+        margin-top: 15px;
+        margin-bottom: 15px;
+        font-weight: 500;
+        color: var(--cork05);
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        animation: slideInRight 0.8s ease-out 0.4s both;
+      }
+      
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      .usertext p {
+        font-size: clamp(14px, 2vw, 20px);
+        line-height: 1.8;
+        margin-top: 20px;
+        opacity: 0.95;
+        animation: fadeIn 1s ease-out 0.6s both;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 0.95; }
+      }
+      
+      .usertext hr {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, 
+          transparent, 
+          var(--cork05), 
+          transparent);
+        margin: 20px 0;
+        animation: expandWidth 0.8s ease-out 0.5s both;
+      }
+      
+      @keyframes expandWidth {
+        from { width: 0; margin: 20px auto; }
+        to { width: 100%; margin: 20px 0; }
+      }
+      
+      /* 添加技能標籤 */
+      .skills {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        animation: fadeIn 1s ease-out 0.8s both;
+      }
+      
+      .skill-tag {
+        background-color: rgba(255, 255, 255, 0.15);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: clamp(12px, 1.5vw, 16px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+      
+      .skill-tag:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+      
+      /* Section 02 - 作品集區 */
+      .section02 {
+        position: relative;
+        min-height: 400px;
+        background-color: var(--cork03);
+        padding: 60px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+      }
+      
+      .section02 .box01,
+      .section02 .box02,
+      .section02 .box03 {
+        position: relative;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background-color: var(--cork08);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        transition: all 0.4s ease;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      
+      .section02 .box01:hover,
+      .section02 .box02:hover,
+      .section02 .box03:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      }
+      
+      .section02 .box01 {
+        background-image: url(../images/cat-3.jpg);
+        background-position: -100px 0;
+      }
+      
+      .section02 .box02 {
+        background-image: url(images/cat-2.jpg);
+        background-position: center;
+      }
+      
+      .section02 .box03 {
+        background-image: url(images/cat-4.jpg);
+        background-position: 0 0;
+      }
+      
+      .section02 a {
+        text-decoration: none;
+        color: var(--cork01);
+        font-size: clamp(24px, 4vw, 40px);
+        background: linear-gradient(135deg, rgba(212, 121, 131, 0.9), rgba(174, 73, 81, 0.9));
+        padding: 15px 30px;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        font-weight: 600;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+      
+      .section02 a:hover {
+        background: linear-gradient(135deg, rgba(174, 73, 81, 1), rgba(142, 58, 65, 1));
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      }
+      
+      /* ===== RWD 響應式設計 ===== */
+      
+      /* 平板尺寸 (768px ~ 1024px) */
+      @media (max-width: 1024px) {
+        .section01 .box01,
+        .section01 .box02,
+        .section01 .box03,
+        .section01 .box04 {
+          width: 150px;
+          height: 150px;
+        }
+        
+        .userimg {
+          top: 80px;
+          bottom: 80px;
+          left: 80px;
+          right: 80px;
+        }
+        
+        .usertext {
+          padding: 30px 40px;
+        }
+        
+        .section02 .box01,
+        .section02 .box02,
+        .section02 .box03 {
+          width: 280px;
+          height: 280px;
+        }
+      }
+      
+      /* 小平板/大手機 (481px ~ 768px) */
+      @media (max-width: 768px) {
+        .section01 .box01,
+        .section01 .box02,
+        .section01 .box03,
+        .section01 .box04 {
+          width: 100px;
+          height: 100px;
+        }
+        
+        .userimg {
+          top: 60px;
+          bottom: 60px;
+          left: 60px;
+          right: 60px;
+        }
+        
+        .usertext {
+          padding: 25px 30px;
+          border-radius: 20px;
+        }
+        
+        .section02 {
+          padding: 40px 20px;
+          gap: 20px;
+        }
+        
+        .section02 .box01,
+        .section02 .box02,
+        .section02 .box03 {
+          width: 240px;
+          height: 240px;
+        }
+      }
+      
+      /* 手機尺寸 (max-width: 480px) */
+      @media (max-width: 480px) {
+        .section01 .box01,
+        .section01 .box02,
+        .section01 .box03,
+        .section01 .box04 {
+          width: 60px;
+          height: 60px;
+        }
+        
+        .userimg {
+          top: 40px;
+          bottom: 40px;
+          left: 40px;
+          right: 40px;
+          border-radius: 15px;
+        }
+        
+        .usertext {
+          padding: 20px 25px;
+          border-radius: 15px;
+          width: calc(100% - 40px);
+        }
+        
+        .usertext h1 {
+          font-size: 32px;
+        }
+        
+        .usertext h2 {
+          font-size: 20px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+        
+        .usertext p {
+          font-size: 14px;
+          line-height: 1.6;
+        }
+        
+        .skills {
+          gap: 8px;
+        }
+        
+        .skill-tag {
+          padding: 6px 12px;
+          font-size: 12px;
+        }
+        
+        .section02 {
+          padding: 30px 15px;
+          gap: 15px;
+        }
+        
+        .section02 .box01,
+        .section02 .box02,
+        .section02 .box03 {
+          width: 200px;
+          height: 200px;
+        }
+        
+        .section02 a {
+          font-size: 20px;
+          padding: 10px 20px;
+        }
+      }
+      
+      /* 極小手機 (max-width: 360px) */
+      @media (max-width: 360px) {
+        .section01 .box01,
+        .section01 .box02,
+        .section01 .box03,
+        .section01 .box04 {
+          width: 50px;
+          height: 50px;
+        }
+        
+        .userimg {
+          top: 30px;
+          bottom: 30px;
+          left: 30px;
+          right: 30px;
+        }
+        
+        .usertext {
+          padding: 15px 20px;
+        }
+        
+        .section02 .box01,
+        .section02 .box02,
+        .section02 .box03 {
+          width: 180px;
+          height: 180px;
+        }
+      }
+      
+      /* 橫向模式優化 */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .section01 {
+          min-height: auto;
+          height: auto;
+          padding: 20px 0;
+        }
+        
+        .userimg {
+          position: relative;
+          top: 20px;
+          bottom: 20px;
+          left: 20px;
+          right: 20px;
+          height: 300px;
+        }
+        
+        .section01 .box01,
+        .section01 .box02,
+        .section01 .box03,
+        .section01 .box04 {
+          width: 80px;
+          height: 80px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section01">
+      <div class="box01"></div>
+      <div class="box02"></div>
+      <div class="box03"></div>
+      <div class="box04"></div>
+      <div class="userimg"></div>
+      <div class="usertext">
+        <h1>Tako CHANG</h1>
+        <hr />
+        <h2>全端工程師 · Full Stack Developer</h2>
+        <p>
+          熱愛將創意轉化為程式碼，專注於打造流暢的使用者體驗。擅長前後端整合開發，用技術解決真實問題，讓每一行程式碼都有意義。
+        </p>
+        <div class="skills">
+          <span class="skill-tag">前後端開發</span>
+          <span class="skill-tag">UI/UX 設計</span>
+          <span class="skill-tag">敏捷開發</span>
+        </div>
+      </div>
+    </div>
+    <div class="section02">
+      <div class="box01">
+        <a href="../practiceonclass/20260129-3.html" target="_blank">作品集1</a>
+      </div>
+      <div class="box02">
+        <a href="20260203-ch1.html" target="_blank">作品集2</a>
+      </div>
+      <div class="box03">
+        <a href="20260203-ch3&ch4.html" target="_blank">作品集3</a>
+      </div>
+    </div>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

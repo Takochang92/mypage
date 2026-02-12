@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>地方美食列表</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/mycss02.css" />
+    <style>
+      .content_box {
+        margin-top: 15px;
+        box-shadow: 2px 2px 4px 2px var(--cork20);
+        border-radius: 15px;
+        padding: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="title-modern text-center">地方美食列表</div>
+    <div class="container">
+      <div class="row" id="card">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="content_box roller-r">
+            <div class="roller-r_box">
+              <div class="btn">查看更多</div>
+            </div>
+            <div
+              style="
+                background-image: url(images/banner-01.jpg);
+                height: 160px;
+                background-position: center center;
+                background-size: cover;
+              "
+            ></div>
+            <div class="h3 text-center fw-600">餐廳名稱</div>
+            <div class="h6">電話：</div>
+            <div class="h6">地址：</div>
+            <p>
+              簡介：
+              案例漢化家長眼中台北年齡去了跟我招標一面文學適應媒體，失望自動文字良好抽菸區擁有加入時間，傳播聲音。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script>
+      $(function () {
+        $.ajax({
+          type: "GET",
+          url: "js/json/ODwsvTravelFood.json",
+          dataType: "json",
+          success: showdata,
+          error: function () {
+            console.log("error - js/json/0DwsvTravelFood.json");
+          },
+        });
+      });
+
+      function showdata(data) {
+        console.log(data);
+
+        $("#card").empty();
+        data.forEach(function (item) {
+          let img = item.PicURL ? item.PicURL : "images/none.avif";
+          let name = item.Name ? item.Name : "None";
+          let tel = item.Tel ? item.Tel : "None";
+          let hostword = item.HostWords
+            ? item.HostWords.substring(0, 30)
+            : "None";
+          let adr =
+            (item.City ?? "") + (item.Town ?? "") + (item.Address ?? "") ||
+            "None";
+
+          let strHTML = `<div class="col-md-6 col-lg-4 col-xl-3 ">
+                <div class="content_box roller-r">
+                    <div class="roller-r_box">
+                        <div class="btn">查看更多</div>
+                    </div>
+                    <div
+                        style="background-image: url('${img}');height: 160px; background-position: center center; background-size: cover; ">
+                    </div>
+                    <div class="h3 text-center fw-600">${name}</div>
+                    <div class="h6">電話：${tel}</div>
+                    <div class="h6">地址：${adr}</div>
+                    <p>${hostword}</p>
+                </div>
+            </div>`;
+          $("#card").append(strHTML);
+        });
+      }
+    </script>
+  </body>
+</html>

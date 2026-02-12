@@ -1,0 +1,395 @@
+/* 字型 */
+@import url("https://fonts.googleapis.com/css2?family=Iansui&display=swap");
+body {
+  font-family: "Iansui", cursive;
+}
+
+/* 配色 */
+:root {
+  /* === 淺木紋理系列 (Light Cork) === */
+  --cork01: #f5ebe3; /* 軟木白 Cork White */
+  --cork02: #e8d5c4; /* 淺木米 Light Wood Beige */
+  --cork03: #d4b89e; /* 原木膚 Natural Cork */
+  --cork04: #b98d72; /* 軟木棕 Cork Brown */
+
+  /* === 酒紅玫瑰系列 (Wine Rose) === */
+  --cork05: #d47983; /* 玫瑰粉紅 Rose Pink */
+  --cork06: #c2646c; /* 莓果紅 Berry Red */
+  --cork07: #ae4951; /* 酒紅 Wine Red */
+  --cork08: #8e3a41; /* 深酒紅 Deep Wine */
+
+  /* === 深紫木質系列 (Deep Plum) === */
+  --cork09: #7a3d52; /* 紫木色 Plum Wood */
+  --cork10: #57233a; /* 茄紫棕 Aubergine */
+  --cork11: #422030; /* 暗紫紅 Dark Plum */
+  --cork12: #2f1823; /* 黑莓紫 Blackberry */
+
+  /* === 碳黑暗影系列 (Charcoal Shadow) === */
+  --cork13: #2a2f34; /* 石墨灰 Graphite */
+  --cork14: #161b1f; /* 碳黑 Charcoal */
+  --cork15: #0f1215; /* 深夜黑 Midnight Black */
+  --cork16: #0a0c0e; /* 純黑 Pure Black */
+
+  /* === 暖調過渡系列 (Warm Transition) === */
+  --cork17: #a8816d; /* 焦糖駝 Caramel Tan */
+  --cork18: #8d5e5a; /* 紅棕木 Redwood */
+  --cork19: #6d4148; /* 栗子紅棕 Chestnut */
+  --cork20: #453a3c; /* 煙燻灰棕 Smoky Brown */
+
+  /* === 霧金琥珀系列 (Misty Amber) === */
+  --cork21: #c9a87c; /* 琥珀金 Amber Gold */
+  --cork22: #b5926a; /* 蜂蜜棕 Honey Brown */
+  --cork23: #e2c8a4; /* 奶油杏 Cream Apricot */
+  --cork24: #d1a68a; /* 杏桃膚 Peach Skin */
+  --cork25: #a07258; /* 肉桂棕 Cinnamon */
+
+  /* === 霜莓暮光系列 (Frost Berry Twilight) === */
+  --cork26: #c98a9a; /* 霜莓粉 Frost Berry */
+  --cork27: #9e5b6e; /* 乾燥玫瑰 Dried Rose */
+  --cork28: #6b3a50; /* 暮光紫 Twilight Plum */
+  --cork29: #3d2a35; /* 熏香棕紫 Incense Mauve */
+  --cork30: #1e1418; /* 深淵褐 Abyss Brown */
+}
+
+文字相關 .fw-100 {
+  font-weight: 100;
+}
+.fw-200 {
+  font-weight: 200;
+}
+.fw-300 {
+  font-weight: 300;
+}
+.fw-400 {
+  font-weight: 400;
+}
+.fw-500 {
+  font-weight: 500;
+}
+.fw-600 {
+  font-weight: 600;
+}
+.fw-700 {
+  font-weight: 700;
+}
+.fw-800 {
+  font-weight: 800;
+}
+.fw-900 {
+  font-weight: 900;
+}
+
+.title-01 {
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--cork10);
+  text-shadow:
+    2px 2px var(--cork12),
+    4px 4px 8px rgba(0, 0, 0, 0.6);
+  letter-spacing: 2px;
+}
+.title-02 {
+  font-size: 56px;
+  font-weight: 600;
+  color: var(--cork05);
+}
+
+/* 優雅極簡風格 - 適合高端品牌 */
+.title-elegant {
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--cork10);
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+/* 現代溫暖風格 - 適合生活風格內容 */
+.title-modern {
+  font-size: 56px;
+  font-weight: 500;
+  color: var(--cork18);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  border-bottom: 3px solid var(--cork05);
+  padding-bottom: 12px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* 復古藝術風格 - 適合創意主題 */
+.title-vintage {
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--cork06);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  text-shadow: 3px 3px 0 var(--cork02);
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+/* === 標題樣式追加 === */
+
+/* 手寫隨性風格 - 適合日記、部落格 */
+.title-handwritten {
+  font-size: 48px;
+  font-weight: 400;
+  color: var(--cork07);
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  border-left: 4px solid var(--cork05);
+  padding-left: 16px;
+}
+
+/* 濃厚深沉風格 - 適合夜間模式、電影感 */
+.title-cinematic {
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--cork01);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 20px rgba(212, 121, 131, 0.4),
+    0 0 60px rgba(87, 35, 58, 0.3);
+}
+
+/* 柔和漸層風格 - 適合美妝、生活品牌 */
+.title-soft {
+  font-size: 52px;
+  font-weight: 500;
+  background: linear-gradient(135deg, var(--cork05), var(--cork27));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+/* 告示牌風格 - 適合公告、活動標題 */
+.title-bulletin {
+  font-size: 60px;
+  font-weight: 700;
+  color: var(--cork02);
+  background-color: var(--cork11);
+  padding: 12px 28px;
+  /* display: inline-block; */
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  box-shadow: 4px 4px 0 var(--cork14);
+}
+
+/* 雕刻浮凸風格 - 適合高級質感頁面 */
+.title-engraved {
+  font-size: 56px;
+  font-weight: 600;
+  color: var(--cork04);
+  text-shadow:
+    1px 1px 0 var(--cork01),
+    -1px -1px 0 var(--cork17);
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
+/* ===== 左滑入 - 暖金色調（適合咖啡/茶飲） ===== */
+.roller-l {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.roller-l .roller-l_box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 90, 43, 0.85),
+    rgba(201, 155, 93, 0.65),
+    rgba(44, 22, 8, 0.9)
+  );
+  left: -100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 60px rgba(201, 155, 93, 0.3);
+  transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.roller-l:hover .roller-l_box {
+  left: 0;
+}
+
+.roller-l .roller-l_box .btn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(201, 155, 93, 0.8);
+  padding: 8px 28px;
+  border-radius: 30px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.roller-l .roller-l_box .btn:hover {
+  background: rgba(201, 155, 93, 0.6);
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(201, 155, 93, 0.5);
+  transform: scale(1.05);
+}
+
+/* ===== 右滑入 - 莓果紫紅（適合果汁/冰沙） ===== */
+.roller-r {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.roller-r .roller-r_box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    225deg,
+    rgba(142, 36, 78, 0.85),
+    rgba(200, 80, 120, 0.6),
+    rgba(72, 12, 50, 0.9)
+  );
+  right: -100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 60px rgba(200, 80, 120, 0.3);
+  transition: right 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.roller-r:hover .roller-r_box {
+  right: 0;
+}
+
+.roller-r .roller-r_box .btn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(200, 80, 120, 0.8);
+  padding: 8px 28px;
+  border-radius: 30px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.roller-r .roller-r_box .btn:hover {
+  background: rgba(200, 80, 120, 0.6);
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(200, 80, 120, 0.5);
+  transform: scale(1.05);
+}
+
+/* ===== 上滑入 - 清涼藍綠（適合氣泡水/調酒） ===== */
+.roller-t {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.roller-t .roller-t_box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 82, 120, 0.9),
+    rgba(40, 180, 190, 0.6),
+    rgba(8, 45, 72, 0.85)
+  );
+  top: -100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 60px rgba(40, 180, 190, 0.25);
+  transition: top 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.roller-t:hover .roller-t_box {
+  top: 0;
+}
+
+.roller-t .roller-t_box .btn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(40, 180, 190, 0.8);
+  padding: 8px 28px;
+  border-radius: 30px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.roller-t .roller-t_box .btn:hover {
+  background: rgba(40, 180, 190, 0.5);
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(40, 180, 190, 0.5);
+  transform: scale(1.05);
+}
+
+/* ===== 下滑入 - 抹茶綠金（適合抹茶/健康飲品） ===== */
+.roller-b {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.roller-b .roller-b_box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(56, 90, 40, 0.9),
+    rgba(140, 175, 80, 0.6),
+    rgba(30, 52, 20, 0.85)
+  );
+  bottom: -100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 60px rgba(140, 175, 80, 0.25);
+  transition: bottom 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.roller-b:hover .roller-b_box {
+  bottom: 0;
+}
+
+.roller-b .roller-b_box .btn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(140, 175, 80, 0.8);
+  padding: 8px 28px;
+  border-radius: 30px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.roller-b .roller-b_box .btn:hover {
+  background: rgba(140, 175, 80, 0.5);
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(140, 175, 80, 0.5);
+  transform: scale(1.05);
+}

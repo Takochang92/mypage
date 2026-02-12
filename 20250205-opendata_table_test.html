@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opendata_table_test_Youbike2.0realtime</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mycss02.css">
+
+    <style>
+        @media screen and (max-width: 768px) {
+            .table-rwd thead {
+                display: none;
+            }
+
+            .table-rwd tbody tr {
+                display: block;
+                border: 2px solid var(--cork20);
+                margin-top: 20px;
+            }
+
+            .table-rwd tbody tr td {
+                display: block;
+                overflow: hidden;
+            }
+
+            .table-rwd tbody tr td::before {
+                content: attr(data-th)" : ";
+                color: var(--cork15);
+                font-size: 20px;
+                font-weight: 600;
+                display: block;
+                float: left;
+                width: 30%;
+                text-align: right;
+                padding-right: 1.5em;
+            }
+
+            .table-rwd tbody tr td span {
+                display: block;
+                float: left;
+                width: 70%;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title-elegant text-center" id="tabletitle">Youbikeopendata</div>
+    <div class="container">
+        <table class="table table-rwd">
+            <thead class="table-info">
+                <tr>
+                    <th>站點名稱</th>
+                    <th>總車位</th>
+                    <th>可借數量</th>
+                    <th>可還車位</th>
+                    <th>站點地址</th>
+                    <th>更新時間</th>
+                </tr>
+            </thead>
+            <tbody id="bikeinfo">
+                <tr>
+                    <td data-th="站點名稱"><span>001</span></td>
+                    <td data-th="總車位"><span>321</span></td>
+                    <td data-th="可借數量"><span>323</span></td>
+                    <td data-th="可還車位"><span>2323</span></td>
+                    <td data-th="站點地址"><span>3232</span></td>
+                    <td data-th="更新時間"><span>32323</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+
+    <script>
+        $(function () {
+            $("#tabletitle").html("Youbike 即時資料");
+
+            $.ajax({
+                type: "GET",
+                url: "js/youbike_immediate.json",
+                dataType: "json",
+                success: showdata,
+                error: function () {
+                    console.log("Bad connection");
+                }
+            });
+        });
+
+        function showdata(data) {
+            console.log(data);
+            $("#bikeinfo").empty();
+            data.forEach(function (item) {
+                // let name = item.sna ? item.sna : "None";
+                // let quantity = item.Quantity ? item.Quantity : 0;
+                // let available = item.available_rent_bikes ? item.available_rent_bikes : 0;
+                // let availablereturn = item.available_return_bikes ? item.available_return_bikes : 0;
+                // let addr = item.ar ? item.ar : "None";
+                // let uptime = item.updateTime ? item.updateTime : "None";
+                let name = item.sna ?? "None";
+                let quantity = item.Quantity ?? 0;
+                let available = item.available_rent_bikes ?? 0;
+                let availablereturn = item.available_return_bikes ?? 0;
+                let addr = item.ar ?? "None";
+                let uptime = item.srcupdateTime ?? "None";
+
+                let strHTML = `<tr>
+                    <td data-th="站點名稱"><span>${name}</span></td>
+                    <td data-th="總車位"><span>${quantity}</span></td>
+                    <td data-th="可借數量"><span>${available}</span></td>
+                    <td data-th="可還車位"><span>${availablereturn}</span></td>
+                    <td data-th="站點地址"><span>${addr}</span></td>
+                    <td data-th="更新時間"><span>${uptime}</span></td>
+                </tr>`
+                $("#bikeinfo").append(strHTML);
+            })
+
+
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

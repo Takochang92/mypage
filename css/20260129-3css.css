@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
+
+      body {
+        background-color: var(--cork02);
+        margin: 0;
+        padding: 0;
+        font-family: "Zen Maru Gothic", sans-serif;
+      }
+      .wrapper {
+        background-color: var(--cork04);
+        width: 100%;
+        max-width: 1024px;
+        margin: 0 auto;
+      }
+      .wrapper .header img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      nav {
+        display: block;
+        background-color: var(--cork03);
+        text-align: center;
+        padding: 10px 0;
+      }
+      nav ul {
+        padding: 0;
+        margin: 0;
+      }
+      nav ul li {
+        display: inline-block;
+        list-style-type: none;
+        margin-right: 15px;
+      }
+      nav ul li a {
+        display: block;
+        background-color: var(--cork08);
+        padding: 10px 5px;
+        border-radius: 10px;
+        margin: 0;
+        box-shadow: 2px 2px 2px 2px var(--cork15);
+        color: var(--cork02);
+        text-decoration: none;
+        font-size: 18px;
+      }
+      nav ul li a:hover {
+        background-color: var(--cork12);
+        color: var(--cork01);
+        box-shadow: 2px 2px 2px 2px var(--cork17);
+      }
+      .main {
+        padding: 30px 5% 30px 5%;
+      }
+      .main .section1 {
+        text-align: center;
+        margin: 0 auto 50px auto;
+        max-width: 800px;
+      }
+      .main .section1 h1 {
+        color: var(--cork01);
+      }
+      .main .section1 p {
+        color: var(--cork13);
+        line-height: 1.6;
+        font-size: 18px;
+      }
+      .main .section2 {
+        text-align: center;
+        margin: 0 auto;
+      }
+      .main .section2 h2 {
+        color: var(--cork02);
+      }
+      .main .section2 .btn-wrap {
+        display: inline-block;
+        background-color: var(--cork03);
+        width: 250px;
+        height: auto;
+        margin: 20px 10px;
+        padding: 15px 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 2px 2px var(--cork20);
+        vertical-align: top;
+      }
+      .main .section2 .btn-wrap h3 {
+        color: var(--cork10);
+      }
+      .main .section2 .btn-wrap p {
+        color: var(--cork17);
+        line-height: 1.5;
+      }
+      .main .section2 .btn-wrap a {
+        display: block;
+        text-decoration: none;
+        color: var(--cork12);
+      }
+      .footer {
+        display: block;
+        background-color: var(--cork13);
+        color: var(--cork02);
+        text-align: center;
+      }
