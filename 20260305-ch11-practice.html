@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ch11-form-practice</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/mycss02.css" />
+    <style>
+      /* ────────────────────────────────────────────
+         全域背景：用 cork 變數打底，模擬軟木質感
+      ──────────────────────────────────────────── */
+      body {
+        background-color: var(--cork02);
+        background-image:
+          radial-gradient(
+            ellipse at 10% 15%,
+            rgba(201, 168, 124, 0.25) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse at 90% 80%,
+            rgba(174, 73, 81, 0.12) 0%,
+            transparent 55%
+          );
+        min-height: 100vh;
+      }
+
+      /* ────────────────────────────────────────────
+         容器：最大寬 768px，置中白卡
+      ──────────────────────────────────────────── */
+      /* .container {
+        max-width: 768px !important;
+      } */
+
+      /* ────────────────────────────────────────────
+         主標題：借用 .title-bulletin 風格概念，
+         但套在現有的 .display-2.text-bg-success 上
+      ──────────────────────────────────────────── */
+      .display-2.text-bg-success {
+        background: linear-gradient(
+          135deg,
+          var(--cork07),
+          var(--cork06)
+        ) !important;
+        color: var(--cork01) !important;
+        letter-spacing: 0.2em;
+        text-shadow: 2px 2px 0 var(--cork11);
+        box-shadow:
+          4px 4px 0 var(--cork08),
+          0 8px 32px rgba(87, 35, 58, 0.25);
+        border: none;
+      }
+
+      /* 訂購明細標題：text-bg-warning → 琥珀金調 */
+      .display-2.text-bg-warning {
+        background: linear-gradient(
+          135deg,
+          var(--cork21),
+          var(--cork17)
+        ) !important;
+        color: var(--cork12) !important;
+        letter-spacing: 0.16em;
+        text-shadow: 1px 1px 0 var(--cork23);
+        box-shadow:
+          4px 4px 0 var(--cork25),
+          0 8px 32px rgba(160, 114, 88, 0.25);
+      }
+
+      /* ────────────────────────────────────────────
+         主卡片：整個 .row.justify-content-center 包
+         一個白底圓角卡片
+      ──────────────────────────────────────────── */
+      /* .row.justify-content-center {
+        background: var(--cork01);
+        border-radius: 24px;
+        padding: 2rem 2rem 1.5rem;
+        box-shadow:
+          0 8px 40px rgba(47, 24, 35, 0.12),
+          0 2px 8px rgba(47, 24, 35, 0.06);
+        border: 1px solid var(--cork23);
+      } */
+      /* ────────────────────────────────────────────
+         卡片：.col-md-10 分開兩個項目
+      ──────────────────────────────────────────── */
+      .col-md-6 {
+        background: var(--cork01);
+        border-radius: 24px;
+        padding: 2rem 2rem 1.5rem;
+        box-shadow:
+          0 8px 40px rgba(47, 24, 35, 0.12),
+          0 2px 8px rgba(47, 24, 35, 0.06);
+        border: 1px solid var(--cork23);
+      }
+
+      /* ────────────────────────────────────────────
+         標籤文字
+      ──────────────────────────────────────────── */
+      .form-label {
+        color: var(--cork10);
+        font-weight: 700;
+        font-size: 0.92rem;
+        letter-spacing: 0.05em;
+      }
+
+      /* ────────────────────────────────────────────
+         文字輸入框
+      ──────────────────────────────────────────── */
+      .form-control {
+        background: var(--cork02);
+        border: 1.5px solid var(--cork03);
+        border-radius: 10px;
+        color: var(--cork12);
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s,
+          background 0.2s;
+      }
+
+      .form-control:focus {
+        background: #fff;
+        border-color: var(--cork06);
+        box-shadow: 0 0 0 3px rgba(194, 100, 108, 0.15);
+        outline: none;
+      }
+
+      /* floating label 顏色 */
+      .form-floating > label {
+        color: var(--cork18);
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      /* ────────────────────────────────────────────
+         Select 下拉
+      ──────────────────────────────────────────── */
+      .form-select {
+        background-color: var(--cork02);
+        border: 1.5px solid var(--cork03);
+        border-radius: 10px;
+        color: var(--cork10);
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ae4951' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      }
+
+      .form-select:focus {
+        border-color: var(--cork06);
+        box-shadow: 0 0 0 3px rgba(194, 100, 108, 0.15);
+        outline: none;
+      }
+
+      /* ────────────────────────────────────────────
+         配料標題
+      ──────────────────────────────────────────── */
+      .h3 {
+        color: var(--cork08);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+
+      /* ────────────────────────────────────────────
+         Checkbox → 膠囊標籤形式
+      ──────────────────────────────────────────── */
+      .form-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: var(--cork23);
+        border: 1.5px solid var(--cork03);
+        border-radius: 99px;
+        padding: 0.32rem 0.9rem 0.32rem 2rem;
+        margin: 0.25rem 0.25rem 0.25rem 0;
+        cursor: pointer;
+        position: relative;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+
+      .form-check:hover {
+        background: var(--cork26);
+        border-color: var(--cork06);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(174, 73, 81, 0.18);
+      }
+
+      .form-check-input {
+        position: absolute;
+        left: 0.65rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1rem !important;
+        height: 1rem !important;
+        border: 1.5px solid var(--cork17);
+        border-radius: 4px !important;
+        accent-color: var(--cork07);
+        margin: 0 !important;
+        cursor: pointer;
+      }
+
+      .form-check-input:checked {
+        background-color: var(--cork07);
+        border-color: var(--cork07);
+      }
+
+      .form-check .form-label {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--cork10);
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      /* ────────────────────────────────────────────
+         Range slider — 酒紅暖調
+      ──────────────────────────────────────────── */
+      .form-range {
+        appearance: none;
+        width: 100%;
+        height: 6px;
+        border-radius: 99px;
+        background: linear-gradient(to right, var(--cork07), var(--cork05));
+        outline: none;
+        margin-top: 0.5rem;
+      }
+
+      .form-range::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--cork01);
+        border: 2.5px solid var(--cork07);
+        box-shadow: 0 2px 8px rgba(142, 58, 65, 0.3);
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+
+      .form-range::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        box-shadow: 0 3px 14px rgba(142, 58, 65, 0.4);
+      }
+
+      /* ────────────────────────────────────────────
+         動態數值：借用 text-primary / text-warning
+         覆寫為 cork 色
+      ──────────────────────────────────────────── */
+      .text-primary {
+        color: var(--cork07) !important;
+      }
+      .text-warning {
+        color: var(--cork21) !important;
+      }
+
+      /* ────────────────────────────────────────────
+         Textarea
+      ──────────────────────────────────────────── */
+      .form-control[id="notw"],
+      textarea.form-control {
+        min-height: 90px;
+        resize: vertical;
+      }
+
+      /* ────────────────────────────────────────────
+         總價區
+      ──────────────────────────────────────────── */
+      .h3.text-danger {
+        color: var(--cork10) !important;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: baseline;
+        gap: 0.4rem;
+        background: linear-gradient(90deg, var(--cork23), transparent);
+        border-left: 4px solid var(--cork06);
+        padding: 0.5rem 1rem;
+        border-radius: 0 10px 10px 0;
+        margin-top: 0.5rem;
+      }
+
+      .text-success {
+        color: var(--cork07) !important;
+      }
+
+      /* ────────────────────────────────────────────
+         按鈕
+      ──────────────────────────────────────────── */
+      .btn {
+        border-radius: 99px;
+        padding: 0.55rem 2.2rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        transition:
+          transform 0.15s,
+          box-shadow 0.2s;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: var(--cork01) !important;
+        border: 1.5px solid var(--cork03) !important;
+        color: var(--cork18) !important;
+      }
+
+      .btn-secondary:hover {
+        background: var(--cork02) !important;
+        border-color: var(--cork17) !important;
+        color: var(--cork10) !important;
+        box-shadow: 0 4px 14px rgba(142, 58, 65, 0.12);
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--cork07),
+          var(--cork06)
+        ) !important;
+        border: none !important;
+        color: var(--cork01) !important;
+        box-shadow: 0 4px 18px rgba(142, 58, 65, 0.3);
+      }
+
+      .btn-primary:hover {
+        box-shadow: 0 6px 24px rgba(142, 58, 65, 0.42);
+      }
+
+      /* ────────────────────────────────────────────
+         訂購明細區塊
+      ──────────────────────────────────────────── */
+      .border.border-3.rounded-4 {
+        border-color: var(--cork03) !important;
+        background: var(--cork02);
+        box-shadow: inset 0 2px 8px rgba(91, 61, 46, 0.06);
+      }
+
+      .border.border-3.rounded-4 h1 {
+        font-size: 1.3rem;
+        color: var(--cork10);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+      }
+
+      /* valid / invalid feedback 顏色 */
+      .valid-feedback {
+        color: var(--cork07);
+      }
+      .invalid-feedback {
+        color: var(--cork08);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5 gx-3">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+          <div
+            class="display-2 text-bg-success fw-900 text-center py-4 rounded-4 text-dark mb-3"
+          >
+            飲料訂購
+          </div>
+          <div class="mb-3 form-floating">
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              id="username"
+            />
+            <label  class="form-label">訂購者名稱（2-5個字）</label>
+            <div class="valid-feedback">輸入符合規定</div>
+            <div class="invalid-feedback">輸入不符合規定</div>
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">產品名稱</label>
+            <input
+              type="text"
+              class="form-control"
+              list="p_list"
+              placeholder="字數 2~6個字"
+              list="p_list"
+              id="p_name"
+            />
+            <datalist id="p_list">
+              <option value="紅茶">紅茶</option>
+              <option value="綠茶">綠茶</option>
+              <option value="珍奶">珍奶</option>
+              <option value="咖啡">咖啡</option>
+            </datalist>
+            <div class="valid-feedback">輸入符合規定</div>
+            <div class="invalid-feedback">輸入不符合規定</div>
+          </div>
+
+          <div class="mb-3">
+            <select name="" id="p_ice" class="form-select form-select-lg">
+              <option value="" class="text-center" disabled selected>
+                ---請選擇冰塊---
+              </option>
+              <option value="正常">正常</option>
+              <option value="少冰">少冰</option>
+              <option value="微冰">微冰</option>
+              <option value="去冰">去冰</option>
+            </select>
+            <div class="valid-feedback">已選取</div>
+            <div class="invalid-feedback">必須選擇冰塊</div>
+          </div>
+          <div class="mb-3">
+            <select name="" id="p_sweet" class="form-select form-select-lg">
+              <option value="" class="text-center" disabled selected>
+                ---請選擇甜度---
+              </option>
+              <option value="全糖">全糖</option>
+              <option value="少糖">少糖</option>
+              <option value="半糖">半糖</option>
+              <option value="微糖">微糖</option>
+              <option value="無糖">無糖</option>
+            </select>
+            <div class="valid-feedback">已選取</div>
+            <div class="invalid-feedback">必須選擇甜度</div>
+          </div>
+          <div class="mb-3">
+            <div class="h3 pt-3">單點配料(每樣10元)：</div>
+            <div class="form-check" id="topping">
+              <input
+                type="checkbox"
+                name="topping"
+                class="form-check-input"
+                value="粉圓"
+              />
+              <label  class="form-label">粉圓</label>
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                name="topping"
+                class="form-check-input"
+                value="QQ"
+              />
+              <label  class="form-label">QQ</label>
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                name="topping"
+                class="form-check-input"
+                value="紅豆"
+              />
+              <label  class="form-label">紅豆</label>
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                name="topping"
+                class="form-check-input"
+                value="綠豆"
+              />
+              <label  class="form-label">綠豆</label>
+            </div>
+            <div class="mb-3">
+              <label >
+                配料：<span class="text-warning fw-600 h3" id="p_topping_text"
+                  >0 </span
+                >元
+              </label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label >
+              每杯單價：<span class="text-warning fw-600 h3" id="p_price_text">50 </span>元
+            </label>
+          </div>
+          <div class="mb-3">
+            <label 
+              >數量：<span class="text-primary fw-600 h3" id="p_num_text"
+                >1 </span
+              >杯</label
+            >
+            <input
+              type="range"
+              class="form-range"
+              min="1"
+              max="100"
+              step="1"
+              value="1"
+              id="p_num"
+            />
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">備註(2-10個字)</label>
+            <textarea name="note" id="notw" class="form-control"></textarea>
+          </div>
+          <div class="h3 text-danger fw-900">
+            總價：<span class="h2 text-success fw-900" id="totalPrice"
+              >XXX </span
+            >元
+          </div>
+          <div class="text-center my-4">
+            <button class="btn btn-secondary my-3" id="btn01">取消</button>
+            <button class="btn btn-primary my-3" id="btn02">送出</button>
+          </div>
+        </div>
+        <div class="col-md-6 d-none" id="showMessages">
+          <div
+            class="display-2 text-bg-warning fw-900 text-center py-4 rounded-4 text-dark mb-3"
+          >
+            飲料訂購明細
+          </div>
+          <div class="border border-3 rounded-4 shoadow-sm p-3 text-center" id="showlist">
+            <h1>目前無訂單資料</h1>
+          </div>
+          <div class="text-center my-3">
+            <button class="btn btn-primary" id="order_btn">確認訂單</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery-4.0.0.js"></script>
+  <script>
+    let flag_username = false;
+    let flag_p_name = false;
+    let flag_p_ice = false;
+    let flag_p_sweet = false;
+
+    let topping_content = []; //儲存單點的配料內容
+    let unitPrice = 0; //每一杯的單價
+    let totalPrice = 0; //訂單總價
+    let toppingPrice = 0;
+
+    $(function () {
+      // 訂購者名稱
+      $("#username").blur(function () {
+        // console.log($(this).val().length);
+        if ($(this).val().length > 2 && $(this).val().length < 6) {
+          $(this).removeClass("is-invalid").addClass("is-valid");
+          flag_username = true;
+        } else {
+          $(this).removeClass("is-valid").addClass("is-invalid");
+          flag_username = false;
+        }
+      });
+
+      // 產品名稱
+      $("#p_name").blur(function () {
+        // console.log($(this).val().length);
+        if ($(this).val().length > 1 && $(this).val().length < 7) {
+          $(this).removeClass("is-invalid").addClass("is-valid");
+          flag_p_name = true;
+        } else {
+          $(this).removeClass("is-valid").addClass("is-invalid");
+          flag_p_name = false;
+        }
+      });
+
+      // 冰塊
+      $("#p_ice").change(function () {
+        // console.log($(this).val());
+        $(this).removeClass("is-invalid").addClass("is-valid");
+        flag_p_ice = true;
+      });
+
+      //甜度
+      $("#p_sweet").change(function(){
+        $(this).removeClass("is-invalid").addClass("is-valid");
+        flag_p_sweet = true;
+      });
+
+      function calculate() {
+        let num = $("#p_num").val();
+        let toppingCount = $("input[name='topping']:checked").length;
+
+        topping_content = [];
+
+        $("input[name='topping']:checked").each(function () {
+          topping_content.push($(this).val());
+        });
+
+        toppingPrice = toppingCount * 10;
+
+        $("#p_topping_text").text(toppingPrice);
+
+        unitPrice = 50 + toppingPrice;
+
+        $("#p_price_text").text(unitPrice);
+
+        totalPrice = num * unitPrice;
+
+        $("#totalPrice").text(totalPrice);
+      }
+
+      $("#p_num").on("input", function () {
+        $("#p_num_text").text($(this).val());
+
+        calculate();
+      });
+
+      $("input[name='topping']").change(function () {
+        calculate();
+      });
+
+      $("#btn02").click(function () {
+        calculate();
+        if (flag_username && flag_p_name && flag_p_ice) {
+          $("#showMessages").removeClass("d-none");
+          let strHTML = `<h1>訂購者：${$("#username").val()}</h1>
+          <h1>產品名稱：${$("#p_name").val()}</h1>
+          <h1>冰塊：${$("#p_ice").val()}</h1>
+          <h1>冰塊：${$("#p_sweet").val()}</h1>
+          <h1>單點配料（每樣10元）：${topping_content.join(", ")}</h1>
+          <h1>配料價格：${toppingPrice}元</h1>
+          <h1>單杯價格：${unitPrice}元</h1>
+          <h1>數量：${$("#p_num").val()}杯</h1>
+          <h1>總價：${totalPrice}元</h1>
+          `;
+          $("#showlist").html(strHTML);
+        } else {
+          alert("表單欄位有錯！");
+        }
+      });
+
+      $("#order_btn").click(function(){
+        let orderData = {
+          username: $("#username").val(),
+          productName: $("#p_name").val(),
+          ice: $("#p_ice").val(),
+          sweetness: $("#p_sweet").val(),
+          toppings: topping_content,
+          toppingPrice: toppingPrice,
+          quantity : $("#p_num").val(),
+          productPrice: unitPrice,
+          totalPrice: totalPrice,
+          createdAt: new Date().toLocaleString(),
+        };
+
+        console.log(orderData);
+
+        console.log(JSON.stringify(orderData));
+
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3000/orders",
+          contentType: "application/json",
+          data: JSON.stringify(orderData),
+            success: function(data){
+              alert("新增成功");
+            },
+            error: function(){
+              alert("新增失敗");
+            }
+        });
+
+      });
+
+
+
+    });
+  </script>
+</html>
