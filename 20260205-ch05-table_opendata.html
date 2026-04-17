@@ -1,161 +1,316 @@
 <!doctype html>
 <html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ch05-table_practice</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/mycss02.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ch05-table_practice</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/mycss02.css" />
-  <style>
-    table img {
-      border-radius: 10px;
-      box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.3);
-    }
+    <!-- ✨ 新增：Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
 
-    @media screen and (max-width: 768px) {
-      .table-rwd thead {
-        display: none;
+    <style>
+      /* ==============================
+       原始設定（完全保留，未更動）
+    ============================== */
+      table img {
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.3);
       }
 
-      .table-rwd tbody tr {
+      @media screen and (max-width: 768px) {
+        .table-rwd thead {
+          display: none;
+        }
+
+        .table-rwd tbody tr {
+          display: block;
+          border: 1px solid var(--cork18);
+          margin-top: 20px;
+        }
+
+        .table-rwd tbody tr td {
+          display: block;
+          overflow: hidden;
+        }
+
+        .table-rwd tbody tr td::before {
+          content: attr(data-th) " : ";
+          color: var(--cork12);
+          font-size: 20px;
+          font-weight: 600;
+          display: block;
+          float: left;
+          width: 30%;
+          text-align: right;
+          padding-right: 1.5em;
+        }
+
+        .table-rwd tbody tr td span {
+          display: block;
+          float: left;
+          width: 70%;
+        }
+      }
+
+      /* ==============================
+       ✨ 新增：美化層
+    ============================== */
+
+      /* --- 全域 --- */
+      body {
+        background-color: #f5f0e8;
+        font-family: "Noto Serif TC", serif;
+        color: #3d2b1f;
+      }
+
+      /* --- 頁面標題 --- */
+      #tabletitle {
+        font-family: "Playfair Display", "Noto Serif TC", serif;
+        font-size: clamp(1.6rem, 4vw, 2.6rem);
+        font-weight: 700;
+        color: #5a3a20;
+        letter-spacing: 0.08em;
+        padding: 40px 16px 28px;
+        position: relative;
+      }
+
+      #tabletitle::after {
+        content: "";
         display: block;
-        border: 1px solid var(--cork18);
-        margin-top: 20px;
+        width: 64px;
+        height: 3px;
+        background: linear-gradient(90deg, #c8935a, #e8c488);
+        border-radius: 99px;
+        margin: 12px auto 0;
+      }
+
+      /* --- 容器 --- */
+      .container {
+        padding-bottom: 56px;
+      }
+
+      /* --- 表格外框 --- */
+      .table-rwd {
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 36px rgba(100, 60, 20, 0.12);
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      /* --- 表頭 --- */
+      .table-rwd thead.table-warning th {
+        background: linear-gradient(135deg, #e8c488 0%, #c8935a 100%);
+        color: #fff;
+        font-family: "Playfair Display", "Noto Serif TC", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 16px 20px;
+        border: none;
+        text-shadow: 0 1px 2px rgba(80, 40, 0, 0.18);
+      }
+
+      .table-rwd thead.table-warning th:first-child {
+        border-radius: 18px 0 0 0;
+      }
+      .table-rwd thead.table-warning th:last-child {
+        border-radius: 0 18px 0 0;
+      }
+
+      /* --- 資料列 --- */
+      .table-rwd tbody tr {
+        transition:
+          background-color 0.22s ease,
+          transform 0.22s ease;
+      }
+
+      .table-rwd tbody tr:hover {
+        background-color: #fdf6ec;
       }
 
       .table-rwd tbody tr td {
-        display: block;
-        overflow: hidden;
+        padding: 14px 20px;
+        vertical-align: middle;
+        border-bottom: 1px solid #f0e6d6;
+        font-size: 0.92rem;
+        color: #4a3525;
       }
 
-      .table-rwd tbody tr td::before {
-        content: attr(data-th)" : ";
-        color: var(--cork12);
-        font-size: 20px;
-        font-weight: 600;
-        display: block;
-        float: left;
-        width: 30%;
-        text-align: right;
-        padding-right: 1.5em;
+      /* 圖片欄 hover 效果 */
+      .table-rwd tbody tr td img {
+        transition:
+          transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
+          box-shadow 0.3s ease;
       }
 
-      .table-rwd tbody tr td span {
-        display: block;
-        float: left;
-        width: 70%;
+      .table-rwd tbody tr:hover td img {
+        transform: scale(1.06);
+        box-shadow: 4px 6px 18px rgba(100, 60, 20, 0.25);
       }
 
-    }
-  </style>
-</head>
+      /* --- 斑馬條紋 --- */
+      .table-rwd tbody tr:nth-child(even) {
+        background-color: #fdf8f2;
+      }
 
-<body>
-  <div class="title-elegant text-center" id="tabletitle">Opendata Applycation</div>
-  <div class="container">
-    <table class="table table-rwd">
-      <thead class="table-warning">
-        <tr>
-          <th>店家名稱</th>
-          <th>店家圖片</th>
-          <th>地址</th>
-          <th>聯絡電話</th>
-          <th>說明</th>
-        </tr>
-      </thead>
-      <tbody id="storelist">
-        <tr>
-          <td data-th="店家名稱"><span>001</span></td>
-          <td data-th="店家圖片">
-            <span><img src="images/drink-7.jpg" width="200px" alt="" /></span>
-          </td>
-          <td data-th="地址"><span>drink-7</span></td>
-          <td data-th="聯絡電話"><span>10</span></td>
-          <td data-th="說明"><span>spicy</span></td>
-        </tr>
-        <tr>
-          <td data-th="店家名稱"><span>002</span></td>
-          <td data-th="店家圖片"><span><img src="images/drink-6.jpg" width="200px" alt="" /></span></td>
-          <td data-th="地址"><span>drink-6</span></td>
-          <td data-th="聯絡電話"><span>15</span></td>
-          <td data-th="說明"><span>sweet</span></td>
-        </tr>
-        <tr>
-          <td data-th="店家名稱"><span>003</span></td>
-          <td data-th="店家圖片"><span><img src="images/drink-5.jpg" width="200px" alt="" /></span></td>
-          <td data-th="地址"><span>drink-5</span></td>
-          <td data-th="聯絡電話"><span>10</span></td>
-          <td data-th="說明"><span>dscdsd</span></td>
-        </tr>
-        <tr>
-          <td data-th="店家名稱"><span>004</span></td>
-          <td data-th="店家圖片"><span><img src="images/drink-4.jpg" width="200px" alt="" /></span></td>
-          <td data-th="地址"><span>drink-4</span></td>
-          <td data-th="聯絡電話"><span>15</span></td>
-          <td data-th="說明"><span>sweet</span></td>
-        </tr>
+      /* --- 最後一列底角圓角 --- */
+      .table-rwd tbody tr:last-child td:first-child {
+        border-radius: 0 0 0 18px;
+      }
+      .table-rwd tbody tr:last-child td:last-child {
+        border-radius: 0 0 18px 0;
+      }
+      .table-rwd tbody tr:last-child td {
+        border-bottom: none;
+      }
 
-      </tbody>
-    </table>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/jquery-4.0.0.js"></script>
-  <script>
-    // JS(javascript) 主程式 $(function(){});
-    // console log 只用在開發時，專案完成要把 console 都刪掉或註解，不然別人會看到你怎麼寫程式，而且會變很亂
-    // 串接 opendata -> 用 $.ajax 來串接前後端資料
-    // 變數跟變數、字串跟變數、字串跟字串之間用 + 串連
-    // . --> class (for css), # --> id (for javascript)
-    // $().empty(); -> 將變數原本的資料清空
-    // JS 宣告變數用『let』
-    $(function () {
-      $("#tabletitle").html("地方美食店家列表");
-
-      // console.log("Hello again.");
-
-      $.ajax({
-        type: "GET",
-        url: "https://data.moa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelFood.aspx?IsTransData=1&UnitId=193",
-        dataType: "json",
-        success: showdata,
-        error: function () {
-          console.log("Bad connection");
+      /* --- RWD 模式下的行動版美化 --- */
+      @media screen and (max-width: 768px) {
+        .table-rwd {
+          border-radius: 12px;
+          box-shadow: 0 4px 20px rgba(100, 60, 20, 0.1);
         }
+
+        .table-rwd tbody tr {
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 2px 10px rgba(100, 60, 20, 0.08);
+          border: none !important;
+          margin-top: 16px;
+        }
+
+        .table-rwd tbody tr td::before {
+          color: #c8935a;
+          font-family: "Playfair Display", "Noto Serif TC", serif;
+        }
+      }
+
+      /* --- 載入動畫 --- */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      #tabletitle {
+        animation: fadeUp 0.5s ease both;
+      }
+
+      .container {
+        animation: fadeUp 0.6s ease 0.1s both;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="title-elegant text-center" id="tabletitle">
+      Opendata Applycation
+    </div>
+    <div class="container">
+      <table class="table table-rwd">
+        <thead class="table-warning">
+          <tr>
+            <th>店家名稱</th>
+            <th>店家圖片</th>
+            <th>地址</th>
+            <th>聯絡電話</th>
+            <th>說明</th>
+          </tr>
+        </thead>
+        <tbody id="storelist">
+          <tr>
+            <td data-th="店家名稱"><span>001</span></td>
+            <td data-th="店家圖片">
+              <span><img src="images/drink-7.jpg" width="200px" alt="" /></span>
+            </td>
+            <td data-th="地址"><span>drink-7</span></td>
+            <td data-th="聯絡電話"><span>10</span></td>
+            <td data-th="說明"><span>spicy</span></td>
+          </tr>
+          <tr>
+            <td data-th="店家名稱"><span>002</span></td>
+            <td data-th="店家圖片">
+              <span><img src="images/drink-6.jpg" width="200px" alt="" /></span>
+            </td>
+            <td data-th="地址"><span>drink-6</span></td>
+            <td data-th="聯絡電話"><span>15</span></td>
+            <td data-th="說明"><span>sweet</span></td>
+          </tr>
+          <tr>
+            <td data-th="店家名稱"><span>003</span></td>
+            <td data-th="店家圖片">
+              <span><img src="images/drink-5.jpg" width="200px" alt="" /></span>
+            </td>
+            <td data-th="地址"><span>drink-5</span></td>
+            <td data-th="聯絡電話"><span>10</span></td>
+            <td data-th="說明"><span>dscdsd</span></td>
+          </tr>
+          <tr>
+            <td data-th="店家名稱"><span>004</span></td>
+            <td data-th="店家圖片">
+              <span><img src="images/drink-4.jpg" width="200px" alt="" /></span>
+            </td>
+            <td data-th="地址"><span>drink-4</span></td>
+            <td data-th="聯絡電話"><span>15</span></td>
+            <td data-th="說明"><span>sweet</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script>
+      $(function () {
+        $("#tabletitle").html("地方美食店家列表");
+
+        $.ajax({
+          type: "GET",
+          url: "https://data.moa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelFood.aspx?IsTransData=1&UnitId=193",
+          dataType: "json",
+          success: showdata,
+          error: function () {
+            console.log("Bad connection");
+          },
+        });
       });
-    });
 
-    function showdata(data) {
-      console.log(data);
+      function showdata(data) {
+        console.log(data);
 
-      $("#storelist").empty();
-      data.forEach(function (item) {
-        // console.log("店家名稱：" + item.Name);
-        // console.log("店家圖片：" + item.PicURL);
-        // console.log("地址：" + item.City + item.Town + item.Address);
-        // console.log("聯絡電話：" + item.Tel);
-        // console.log("說明：" + item.FoodFeature);
+        $("#storelist").empty();
+        data.forEach(function (item) {
+          let img = item.PicURL ? item.PicURL : "images/cat-1.jpg";
+          let name = item.Name ? item.Name : "未提供";
+          let tel = item.Tel ? item.Tel : "未提供電話";
+          let foodfeature = item.FoodFeature ? item.FoodFeature : "未提供";
+          let adr =
+            item.City + item.Town + item.Address
+              ? item.City + item.Town + item.Address
+              : "未提供";
 
-        // 資料防呆 可用 三元運算子（? : ;）
-        let img = item.PicURL ? item.PicURL : "images/cat-1.jpg";
-        let name = item.Name ? item.Name : "未提供";
-        let tel = item.Tel ? item.Tel : "未提供電話";
-        let foodfeature = item.FoodFeature ? item.FoodFeature : "未提供";
-        let adr = item.City + item.Town + item.Address ? item.City + item.Town + item.Address : "未提供";
-
-
-        let strHTML = `<tr>
+          let strHTML = `<tr>
                         <td data-th="店家名稱"><span>${name}</span></td>
                         <td data-th="店家圖片"><span> <img src="${img}" width="200" alt="" /> </span></td>
                         <td data-th="地址"><span>${adr}</span></td>
                         <td data-th="聯絡電話"><span>${tel}</span></td>
                         <td data-th="說明"><span>${foodfeature}</span></td>
                       </tr>`;
-        $("#storelist").append(strHTML);
-      });
-    }
-
-  </script>
-</body>
-
+          $("#storelist").append(strHTML);
+        });
+      }
+    </script>
+  </body>
 </html>
