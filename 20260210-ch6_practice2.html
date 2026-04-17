@@ -7,7 +7,15 @@
     <title>ch6-切版練習2</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mycss02.css">
+
+    <!-- ✨ 新增：Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
     <style>
+        /* ==============================
+           原始設定（完全保留，未更動）
+        ============================== */
         .box01 {
             height: 240px;
             background-image: url(images/cat-5.jpg);
@@ -65,6 +73,157 @@
                 line-height: 220px;
             }
         }
+
+        /* ==============================
+           ✨ 新增：美化層（不蓋掉原設定）
+        ============================== */
+
+        /* --- 全域質感 --- */
+        body {
+            background-color: #faf7f2;
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .container {
+            padding-top: 24px;
+            padding-bottom: 48px;
+        }
+
+        /* --- Hero Banner 增強 --- */
+        .box01 {
+            height: 320px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(120, 90, 60, 0.18);
+        }
+
+        .box01::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,248,235,0) 40%,
+                rgba(250,247,242,0.55) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* --- 選單按鈕增強 --- */
+        .box02 {
+            font-family: 'Playfair Display', 'Noto Serif TC', serif;
+            font-size: 1.15rem;
+            letter-spacing: 0.08em;
+            border-radius: 16px;
+            transition: transform 0.28s cubic-bezier(.34,1.56,.64,1),
+                        box-shadow 0.28s ease,
+                        background-color 0.22s ease;
+            box-shadow: 0 4px 14px rgba(160, 120, 80, 0.13);
+            cursor: pointer;
+        }
+
+        .box02:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 12px 28px rgba(120, 80, 40, 0.22);
+        }
+
+        @media screen and (min-width: 992px) {
+            .box02:hover {
+                border-radius: 50%;
+            }
+        }
+
+        /* --- 卡片增強 --- */
+        .box03 {
+            background-color: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            padding: 0;
+            transition: transform 0.3s cubic-bezier(.34,1.2,.64,1),
+                        box-shadow 0.3s ease;
+        }
+
+        .box03:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(120, 80, 40, 0.16) !important;
+        }
+
+        .box03 img.img-fluid {
+            width: 100%;
+            object-fit: cover;
+            max-height: 200px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .box03:hover img.img-fluid {
+            transform: scale(1.04);
+        }
+
+        .box03 .h3 {
+            font-family: 'Playfair Display', 'Noto Serif TC', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            color: #5a3e28;
+            padding: 12px 14px 4px;
+        }
+
+        .box03 p.fw-600 {
+            padding: 0 14px 16px;
+            font-size: 0.82rem;
+            color: #7a6552;
+            line-height: 1.8;
+        }
+
+        /* Roller overlay button 美化 */
+        .box03 .btn {
+            background-color: rgba(255,248,235,0.92);
+            color: #5a3e28;
+            border: 1.5px solid rgba(120, 80, 40, 0.35);
+            border-radius: 30px;
+            padding: 8px 28px;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 0.88rem;
+            letter-spacing: 0.1em;
+            backdrop-filter: blur(4px);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .box03 .btn:hover {
+            background-color: #5a3e28;
+            color: #faf7f2;
+        }
+
+        /* --- 頁面入場動畫 --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .box01 {
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .box02 {
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .col-sm-6:nth-child(1) .box02 { animation-delay: 0.1s; }
+        .col-sm-6:nth-child(2) .box02 { animation-delay: 0.2s; }
+        .col-sm-6:nth-child(3) .box02 { animation-delay: 0.3s; }
+        .col-sm-6:nth-child(4) .box02 { animation-delay: 0.4s; }
+
+        .box03 {
+            animation: fadeUp 0.55s ease both;
+        }
+
+        .col-md-6:nth-child(1) .box03 { animation-delay: 0.15s; }
+        .col-md-6:nth-child(2) .box03 { animation-delay: 0.25s; }
+        .col-md-6:nth-child(3) .box03 { animation-delay: 0.35s; }
+        .col-md-6:nth-child(4) .box03 { animation-delay: 0.45s; }
+        .col-md-6:nth-child(5) .box03 { animation-delay: 0.55s; }
+        .col-md-6:nth-child(6) .box03 { animation-delay: 0.65s; }
     </style>
 </head>
 
