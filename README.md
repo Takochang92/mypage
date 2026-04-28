@@ -6,18 +6,21 @@
 
 ```
 mypage/
-├── index.html                       # 個人作品集首頁
+├── index.html                         # 個人作品集首頁
 ├── 20260205-ch05-table_opendata.html  # Ch05｜響應式表格 × 開放資料 API
 ├── 20260210-ch6_practice2.html        # Ch06｜Bootstrap 切版練習
 ├── 20260212-1.html                    # Ch06 延伸｜地方美食卡片列表
 ├── 20260305-ch11-practice.html        # Ch11｜表單驗證與 AJAX 送出
 ├── SPA.html                           # 綜合｜WonderLand 單頁網站
+├── 20260428-OSM.html                  # OSM 地圖 × 旅遊資料標記
 ├── css/
 │   ├── bootstrap.min.css
-│   └── mycss02.css                    # 自訂 cork 色票變數與通用樣式
+│   ├── mycss02.css                    # 自訂 cork 色票變數與通用樣式
+│   └── table-rwd.css
 ├── js/
 │   ├── bootstrap.bundle.min.js
 │   ├── jquery-4.0.0.js
+│   ├── travelData.js
 │   └── json/
 │       └── ODwsvTravelFood.json
 └── images/
@@ -102,6 +105,19 @@ mypage/
 - **s07**：開放時間與聯絡資訊（Parallax 背景、毛玻璃卡片）
 - **登入 / 註冊 Modal**：以 localStorage 儲存使用者，SweetAlert2 提供完整驗證提示（格式、長度、重複帳號）
 
+---
+
+### 20260428-OSM.html — OSM 地圖 × 旅遊資料標記
+
+**綜合練習：Leaflet.js × OpenStreetMap × 農業部旅遊資料**
+
+以 Leaflet.js 整合 OpenStreetMap 地圖，將農業部旅遊美食資料標記於地圖上。
+
+- 使用 Leaflet.js 建立全螢幕互動式地圖，以台灣中心座標初始化
+- 讀取 `travelData.js` 旅遊資料，過濾無座標項目後以 `L.marker` 逐筆標記
+- 每個標記點開啟 Popup，內含店家圖片、名稱、地址（縣市＋鄉鎮＋地址）、電話與官網連結
+- 底圖：OpenStreetMap 標準磚塊圖層
+
 ## 技術
 
 | 類別 | 使用技術 |
@@ -109,5 +125,6 @@ mypage/
 | 版面 | Bootstrap 5、自訂 CSS（cork 色票）|
 | 互動 | jQuery 4、原生 JS |
 | 資料 | AJAX（遠端 API / 本地 JSON）|
+| 地圖 | Leaflet.js × OpenStreetMap |
 | 驗證 | Bootstrap Validation、SweetAlert2 |
 | 字型 | Google Fonts（Noto Serif TC、Playfair Display、Noto Sans TC）|
