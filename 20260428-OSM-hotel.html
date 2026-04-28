@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSM - 觀光署旅館資料</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <link rel="stylesheet" href="css/mycss02.css" />
+    <link rel="stylesheet" href="css/table-rwd.css" />
+    <style>
+      .marker-cluster-medium {
+        background-color: rgba(236, 46, 163, 0.2);
+      }
+      .marker-cluster-medium div {
+        background-color: rgba(206, 2, 128, 0.8);
+      }
+      .marker-cluster-small {
+        background-color: rgba(65, 228, 73, 0.2);
+      }
+      .marker-cluster-small div {
+        background-color: rgba(14, 99, 173, 0.8);
+      }
+      .marker-cluster-large {
+        background-color: rgba(218, 147, 173, 0.2);
+      }
+      .marker-cluster-large div {
+        background-color: rgba(243, 4, 92, 0.8);
+      }
+      .marker-cluster div {
+        width: 30px;
+        height: 30px;
+        margin-left: 5px;
+        margin-top: 5px;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 50%;
+      }
+      .marker-cluster span {
+        line-height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section vh-100 bg-success" id="map"></div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="js/travelData.js"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script>
+      let HotelList = [];
+      let map = {};
+      $(function () {
+        // 產生地圖
+        var map = L.map("map").setView([24.17122, 120.609633], 8);
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+          map,
+        );
+
+        let markers = new L.markerClusterGroup().addTo(map);
+
+        // 讀取資料
+        axios
+          .get("js/json/HotelList.json")
+          .then(function (response) {
+            console.log(response);
+            console.log(normalize(response.data.Hotels));
+            HotelList = normalize(response.data.Hotels);
+
+            // 產生 marker
+            HotelList.forEach((item) => {
+              if (!item.Lat || !item.Lng) {
+                return;
+              }
+              const lat_lng = [item.Lat, item.Lng];
+              const strHTML = `<div class="card" style="width: 18rem">
+      <img src="${item.ImgURL}" alt="">
+      <div class="card-body">
+        <h5 class="card-title">${item.Name}</h5>
+        <p class="card-text">地址：${item.City} ${item.Town} ${item.StreetAddress}</p>
+        <p class="card-text">電話：${item.Tel}</p>
+        <a href="${item.Web}" class="btn btn-danger w-100">官網</a>
+
+      </div>
+    </div>`;
+              //   L.marker(lat_lng).addTo(map).bindPopup(strHTML);
+              markers.addLayer(L.marker(lat_lng).bindPopup(strHTML));
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .finally(function (error) {
+            // always executed
+          });
+      });
+      // name, city, town, StreetAddress, Telephones, hotstwords, imgURL, WebsiteURL
+      function normalize(data) {
+        return (
+          data
+            .map(function (item) {
+              const name = (item.HotelName ?? "").trim();
+              const city = (item.PostalAddress.City ?? "").trim();
+              const town = (item.PostalAddress.Town ?? "").trim();
+              const streetAddress = (
+                item.PostalAddress.StreetAddress ?? ""
+              ).trim();
+              const tel = String(item.Telephones[0].Tel ?? "").trim();
+              const hostwords = (item.Description ?? "").trim();
+              const imgURL = (item.Images[0]?.URL ?? "").trim();
+              const lat = item.PositionLat ?? "";
+              const lng = item.PositionLon ?? "";
+               const web = (item.WebsiteURL ?? "").trim();
+              return {
+                Name: name === "" ? "未提供名稱" : name,
+                City: city === "" ? "未提供地址" : city,
+                Town: town === "" ? "未提供地址" : town,
+                StreetAddress:
+                  streetAddress === "" ? "未提供地址" : streetAddress,
+                Tel: tel === "" ? "未提供電話" : tel,
+                HostWords: hostwords === "" ? "未提供簡介" : hostwords,
+                ImgURL: imgURL === "" ? "未提供圖片" : imgURL,
+                Lat: lat === "" ? "未提供 lat" : lat,
+                Lng: lng === "" ? "未提供 lng" : lng,
+                Web: web,
+              };
+            })
+            //   保留有圖片的資料 and 有 Lan and 有 Lng 的資料
+            .filter(function (item) {
+              return (
+                item.ImgURL != "未提供圖片" &&
+                item.Lat != "未提供 lat" &&
+                item.Lng != "未提供 lng"
+              );
+            })
+        );
+      }
+    </script>
+  </body>
+</html>
