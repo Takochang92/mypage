@@ -12,7 +12,10 @@ mypage/
 ├── 20260212-1.html                    # Ch06 延伸｜地方美食卡片列表
 ├── 20260305-ch11-practice.html        # Ch11｜表單驗證與 AJAX 送出
 ├── SPA.html                           # 綜合｜WonderLand 單頁網站
+├── 20260417-SPA-API.html              # 綜合｜派對公司 SPA × Axios API 串接
+├── 20260423-SPA-API-controlPanel.html # 綜合｜派對公司後台控制台
 ├── 20260428-OSM.html                  # OSM 地圖 × 旅遊資料標記
+├── 20260428-OSM-hotel.html            # OSM 地圖 × 觀光署旅館資料 × Marker Cluster
 ├── css/
 │   ├── bootstrap.min.css
 │   ├── mycss02.css                    # 自訂 cork 色票變數與通用樣式
@@ -118,13 +121,55 @@ mypage/
 - 每個標記點開啟 Popup，內含店家圖片、名稱、地址（縣市＋鄉鎮＋地址）、電話與官網連結
 - 底圖：OpenStreetMap 標準磚塊圖層
 
+---
+
+### 20260417-SPA-API.html — 派對公司官方網站
+
+**綜合練習：SPA × Axios × 後端 API 串接**
+
+以派對公司為主題製作的多頁段單頁網站，整合 Axios 串接後端 RESTful API。
+
+- **s01**：社群連結列（Facebook、LINE、X）
+- **s02**：響應式 Navbar，含服務項目 Dropdown、登入 / 註冊按鈕、登入後顯示會員名與「後台管理」連結
+- **s03**：全幅 Carousel 幻燈片（WOW.js bounceInLeft 入場動畫），含企業活動方案文字說明
+- **s05**：時間軸（Timeline）版型介紹公司沿革
+- **s08**：團隊成員卡片，hover 圓角＋縮放動畫
+- **登入 / 註冊**：以 `axios.post` 串接 `http://127.0.0.1:5000/api/register` 與 `/api/login`；`/api/me` 驗證 Token 並還原登入狀態；SweetAlert2 提供驗證提示
+- **後台連結**：登入後顯示「後台管理」按鈕，導向 `20260423-SPA-API-controlPanel.html`
+
+---
+
+### 20260423-SPA-API-controlPanel.html — 後台控制台
+
+**綜合練習：後台管理介面**
+
+派對公司網站的後台管理頁面，搭配 `20260417-SPA-API.html` 使用。
+
+- 獨立頁面，Navbar 含「首頁」連結返回前台
+- 登入 / 註冊 Modal，以 Axios + SweetAlert2 處理驗證
+- 使用 `counterup2` 數字滾動計數效果
+
+---
+
+### 20260428-OSM-hotel.html — OSM 地圖 × 觀光署旅館資料 × Marker Cluster
+
+**綜合練習：Leaflet.js × MarkerCluster × 觀光署旅館 JSON**
+
+以 Leaflet.js 整合 OpenStreetMap 地圖，載入觀光署旅館資料並以叢集（Cluster）方式呈現。
+
+- 使用 Leaflet.js 建立全螢幕地圖，初始化座標置於台灣中部
+- 以 Axios 讀取 `js/json/HotelList.json`，透過 `normalize()` 函式標準化欄位（名稱、地址、電話、圖片、座標、官網）
+- 過濾無圖片或無座標資料後，以 `leaflet.markercluster` 外掛合併標記，減少大量 Marker 的視覺雜亂
+- 叢集分三級（small / medium / large）以不同顏色區分；每個標記點 Popup 含旅館圖片、名稱、地址、電話與官網連結
+
 ## 技術
 
 | 類別 | 使用技術 |
 |---|---|
 | 版面 | Bootstrap 5、自訂 CSS（cork 色票）|
 | 互動 | jQuery 4、原生 JS |
-| 資料 | AJAX（遠端 API / 本地 JSON）|
-| 地圖 | Leaflet.js × OpenStreetMap |
+| 資料 | AJAX（遠端 API / 本地 JSON）、Axios |
+| 地圖 | Leaflet.js × OpenStreetMap、Leaflet.MarkerCluster |
 | 驗證 | Bootstrap Validation、SweetAlert2 |
+| 動畫 | WOW.js × Animate.css、CounterUp2 |
 | 字型 | Google Fonts（Noto Serif TC、Playfair Display、Noto Sans TC）|
